@@ -33,7 +33,10 @@ const Pagination: FC<IProps> = ({ totalPages, showPages, page, setPage }) => {
 
   return (
     <>
-      <nav aria-label="Page navigation example">
+      <nav
+        className="mt-4 d-flex justify-content-center"
+        aria-label="Page navigation example"
+      >
         <ul className="pagination">
           {genItems(showPages).map((item) => {
             return (

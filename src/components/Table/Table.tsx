@@ -1,59 +1,67 @@
-import React, { useEffect, useState } from "react";
-import { accounts } from "../../data/accounts";
-import { IAccount } from "../../types";
-import Pagination from "../Pagination/Pagination";
+import React, { useEffect, useState, FC } from "react";
 
-const Table = () => {
-  const [data, setData] = useState<IAccount[]>([]);
+import { IAccount, IColumn, IProfile } from "../../types";
+import Pagination from "../Pagination/Pagination";
+import { nanoid } from "nanoid";
+
+const SHOW_ROWS = 10;
+
+interface IProps {
+  data: IAccount[] | IProfile[];
+  index: string;
+  columns: IColumn[];
+  onClick: (index: number) => void;
+}
+
+const Table: FC<IProps> = ({ data, index, columns, onClick }) => {
+  const [showData, setShowData] = useState<IAccount[] | IProfile[]>([]);
   const [page, setPage] = useState<number>(1);
-  const [sort, setSort] = useState<string>("id");
+  const [sort, setSort] = useState<string>(index);
+  const [typeColumn, setTypeColumn] = useState<string>("number");
   const [asc, setAsc] = useState<boolean>(true);
 
-  const SHOW_ITEMS = 5;
-
   useEffect(() => {
-    let sortData = [];
-    setAsc(!asc);
-    switch (sort) {
-      case "email":
+    let sortData: IAccount[] | IProfile[] = [];
+
+    switch (typeColumn) {
+      case "string":
         if (asc) {
-          sortData = accounts.sort((a, b) => {
-            return b["email"].localeCompare(a["email"]);
+          sortData = data.sort((a, b) => {
+            return a[sort].toString().localeCompare(b[sort].toString());
           });
         } else {
-          sortData = accounts.sort((a, b) => {
-            return a.email.localeCompare(b.email);
+          sortData = data.sort((a, b) => {
+            return b[sort].toString().localeCompare(a[sort].toString());
           });
         }
         break;
 
-      case "token":
-        sortData = accounts.sort((a, b) => {
-          return a.authToken.localeCompare(b.authToken);
-        });
-        break;
-
-      case "date":
-        sortData = accounts.sort((a, b) => {
-          return a.creationDate.getTime() - b.creationDate.getTime();
-        });
+      case "Data":
+        if (asc) {
+          sortData = data.sort((a, b) => {
+            return (a[sort] as Date).getTime() - (b[sort] as Date).getTime();
+          });
+        } else {
+          sortData = data.sort((a, b) => {
+            return (b[sort] as Date).getTime() - (a[sort] as Date).getTime();
+          });
+        }
         break;
 
       default:
-        sortData = accounts.sort((a, b) => {
-          return a.accountId - b.accountId;
-        });
+        if (asc) {
+          sortData = data.sort((a, b) => {
+            return Number(a[sort]) - Number(b[sort]);
+          });
+        } else {
+          sortData = data.sort((a, b) => {
+            return Number(b[sort]) - Number(a[sort]);
+          });
+        }
         break;
     }
-    setData(sortData.slice((page - 1) * SHOW_ITEMS, page * SHOW_ITEMS));
-  }, [page, sort]);
-
-  const columns = {
-    id: "ID",
-    email: "Email",
-    token: "Token",
-    date: "Date create",
-  };
+    setShowData(sortData.slice((page - 1) * SHOW_ROWS, page * SHOW_ROWS));
+  }, [page, sort, asc, data, typeColumn]);
 
   const ascSymbol = asc ? "△" : "▽";
 
@@ -62,51 +70,61 @@ const Table = () => {
       <table className="table table-striped">
         <thead>
           <tr>
-            <th scope="col" onClick={() => setSort("id")}>
-              {columns.id}
-              {sort === "id" && (
-                <span className="text-black text-opacity-25"> {ascSymbol}</span>
-              )}
-            </th>
-            <th scope="col" onClick={() => setSort("email")}>
-              {columns.email}
-              {sort === "email" && (
-                <span className="text-black text-opacity-25"> {ascSymbol}</span>
-              )}
-            </th>
-            <th scope="col" onClick={() => setSort("token")}>
-              {columns.token}
-              {sort === "token" && (
-                <span className="text-black text-opacity-25"> {ascSymbol}</span>
-              )}
-            </th>
-            <th scope="col" onClick={() => setSort("date")}>
-              {columns.date}
-              {sort === "date" && (
-                <span className="text-black text-opacity-25"> {ascSymbol}</span>
-              )}
-            </th>
+            {columns.map((column) => {
+              return (
+                <th scope="col" key={column.key}>
+                  <button
+                    className="btn"
+                    onClick={() => {
+                      setAsc(!asc);
+                      setSort(column.key);
+                      setTypeColumn(column.typeData);
+                    }}
+                  >
+                    {column.title}
+                    {sort === column.key && (
+                      <span className="text-black text-opacity-25">
+                        {" "}
+                        {ascSymbol}
+                      </span>
+                    )}
+                  </button>
+                </th>
+              );
+            })}
           </tr>
         </thead>
         <tbody>
-          {data.map((account: IAccount) => {
+          {showData.map((row) => {
             return (
-              <tr key={account.accountId.toString()}>
-                <td>{account.accountId}</td>
-                <td>{account.email}</td>
-                <td>{account.authToken}</td>
-                <td>{account.creationDate.toLocaleString()}</td>
+              <tr
+                key={nanoid()}
+                onClick={() => {
+                  onClick(Number(row[index]));
+                }}
+              >
+                {columns.map((column) => {
+                  return (
+                    <td key={column.key}>
+                      {column.typeData === "Date"
+                        ? row[column.key].toLocaleString()
+                        : row[column.key].toString()}
+                    </td>
+                  );
+                })}
               </tr>
             );
           })}
         </tbody>
       </table>
-      <Pagination
-        page={page}
-        totalPages={30 / 5}
-        showPages={10}
-        setPage={setPage}
-      />
+      {data.length > SHOW_ROWS && (
+        <Pagination
+          page={page}
+          totalPages={data.length / SHOW_ROWS}
+          showPages={10}
+          setPage={setPage}
+        />
+      )}
     </>
   );
 };
