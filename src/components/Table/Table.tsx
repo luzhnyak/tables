@@ -1,27 +1,29 @@
 import React, { useEffect, useState, FC } from "react";
 
-import { IAccount, IColumn, IProfile } from "../../types";
+import { IAccount, IColumn, IProfile, IСampaign } from "../../types";
 import Pagination from "../Pagination/Pagination";
 import { nanoid } from "nanoid";
 
 const SHOW_ROWS = 10;
 
 interface IProps {
-  data: IAccount[] | IProfile[];
+  data: IAccount[] | IProfile[] | IСampaign[];
   index: string;
   columns: IColumn[];
-  onClick: (index: number) => void;
+  onClick: (id: number) => void;
 }
 
 const Table: FC<IProps> = ({ data, index, columns, onClick }) => {
-  const [showData, setShowData] = useState<IAccount[] | IProfile[]>([]);
+  const [showData, setShowData] = useState<
+    IAccount[] | IProfile[] | IСampaign[]
+  >([]);
   const [page, setPage] = useState<number>(1);
   const [sort, setSort] = useState<string>(index);
   const [typeColumn, setTypeColumn] = useState<string>("number");
   const [asc, setAsc] = useState<boolean>(true);
 
   useEffect(() => {
-    let sortData: IAccount[] | IProfile[] = [];
+    let sortData: IAccount[] | IProfile[] | IСampaign[] = [];
 
     switch (typeColumn) {
       case "string":

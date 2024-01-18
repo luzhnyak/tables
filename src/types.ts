@@ -20,3 +20,12 @@ export interface IProfile {
   country: string;
   [key: string]: string | number;
 }
+
+export interface IСampaign {
+  clicks: number;
+  cost: number;
+  date: Date;
+  profileId: number;
+  campaignId: number;
+  [key: string]: string | number | Date;
+}

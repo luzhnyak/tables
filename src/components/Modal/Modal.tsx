@@ -2,13 +2,17 @@ import React, { FC, ReactNode } from "react";
 
 interface IProps {
   title: string;
-  onClose: () => void;
+  onClose: (entity: string) => void;
   children: ReactNode;
+  entity: string;
+  size?: string;
 }
 
-const Modal: FC<IProps> = ({ title, children, onClose }) => {
+const Modal: FC<IProps> = ({ title, children, onClose, entity, size }) => {
   return (
-    <div className="modal modal-xl d-block">
+    <div
+      className={size === "large" ? "modal modal-xl d-block" : "modal d-block"}
+    >
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
@@ -18,7 +22,7 @@ const Modal: FC<IProps> = ({ title, children, onClose }) => {
               className="btn-close"
               data-bs-dismiss="modal"
               aria-label="Close"
-              onClick={onClose}
+              onClick={() => onClose(entity)}
             ></button>
           </div>
           <div className="modal-body">{children}</div>

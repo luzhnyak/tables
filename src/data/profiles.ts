@@ -1,6 +1,6 @@
 export const profiles = [
   {
-    country: "Russian Federation",
+    country: "Ukraine",
     marketplace: "Hickle Group",
     accountId: 1,
     profileId: 1,

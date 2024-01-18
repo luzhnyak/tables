@@ -25,10 +25,11 @@ const columns = [
 ];
 
 interface IProps {
+  onClick: (id: number) => void;
   id: number;
 }
 
-const ProfileTable: FC<IProps> = ({ id }) => {
+const ProfileTable: FC<IProps> = ({ id, onClick }) => {
   const [filtrProfiles, setFiltrProfiles] = useState<IProfile[]>([]);
 
   useEffect(() => {
@@ -40,8 +41,8 @@ const ProfileTable: FC<IProps> = ({ id }) => {
       data={filtrProfiles}
       index="profileId"
       columns={columns}
-      onClick={() => {
-        alert("Test");
+      onClick={(id: number) => {
+        onClick(id);
       }}
     ></Table>
   );
