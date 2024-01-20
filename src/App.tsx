@@ -1,4 +1,4 @@
-import React, { useState, ReactNode } from "react";
+import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { accounts } from "./data/accounts";
 
@@ -46,15 +46,11 @@ function App() {
   const [idCampaign, setIdCampaign] = useState<number>(0);
 
   const closeModal = (entity: string) => {
-    console.log(entity);
-
     switch (entity) {
       case "profile":
-        console.log(entity);
         setIsModalProfile(false);
         break;
       case "campaign":
-        console.log(entity);
         setIsModalCampaign(false);
         break;
       default:

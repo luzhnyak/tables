@@ -45,11 +45,9 @@ const CampaignTable: FC<IProps> = ({ id }) => {
   return (
     <Table
       data={filtrCampaigns}
-      index="profileId"
+      index="campaignId"
       columns={columns}
-      onClick={() => {
-        alert("Test");
-      }}
+      onClick={() => {}}
     ></Table>
   );
 };

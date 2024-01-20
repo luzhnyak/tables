@@ -11,7 +11,9 @@ interface IProps {
 const Modal: FC<IProps> = ({ title, children, onClose, entity, size }) => {
   return (
     <div
-      className={size === "large" ? "modal modal-xl d-block" : "modal d-block"}
+      className={
+        size === "large" ? "modal modal-xl d-block" : "modal modal-lg d-block"
+      }
     >
       <div className="modal-dialog">
         <div className="modal-content">
@@ -26,16 +28,6 @@ const Modal: FC<IProps> = ({ title, children, onClose, entity, size }) => {
             ></button>
           </div>
           <div className="modal-body">{children}</div>
-          {/* <div className="modal-footer">
-            <button
-              type="button"
-              className="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Close
-            </button>
-            
-          </div> */}
         </div>
       </div>
     </div>
