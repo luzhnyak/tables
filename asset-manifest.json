@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.73d734ce.css",
-    "main.js": "/static/js/main.94ce0f97.js",
-    "static/js/787.b01b676a.chunk.js": "/static/js/787.b01b676a.chunk.js",
-    "index.html": "/index.html",
-    "main.73d734ce.css.map": "/static/css/main.73d734ce.css.map",
-    "main.94ce0f97.js.map": "/static/js/main.94ce0f97.js.map",
-    "787.b01b676a.chunk.js.map": "/static/js/787.b01b676a.chunk.js.map"
+    "main.css": "/urban-chainsaw/static/css/main.73d734ce.css",
+    "main.js": "/urban-chainsaw/static/js/main.71441b64.js",
+    "static/js/787.b01b676a.chunk.js": "/urban-chainsaw/static/js/787.b01b676a.chunk.js",
+    "index.html": "/urban-chainsaw/index.html",
+    "main.73d734ce.css.map": "/urban-chainsaw/static/css/main.73d734ce.css.map",
+    "main.71441b64.js.map": "/urban-chainsaw/static/js/main.71441b64.js.map",
+    "787.b01b676a.chunk.js.map": "/urban-chainsaw/static/js/787.b01b676a.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.73d734ce.css",
-    "static/js/main.94ce0f97.js"
+    "static/js/main.71441b64.js"
   ]
 }
