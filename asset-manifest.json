@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/urban-chainsaw/static/css/main.73d734ce.css",
-    "main.js": "/urban-chainsaw/static/js/main.71441b64.js",
-    "static/js/787.b01b676a.chunk.js": "/urban-chainsaw/static/js/787.b01b676a.chunk.js",
-    "index.html": "/urban-chainsaw/index.html",
-    "main.73d734ce.css.map": "/urban-chainsaw/static/css/main.73d734ce.css.map",
-    "main.71441b64.js.map": "/urban-chainsaw/static/js/main.71441b64.js.map",
-    "787.b01b676a.chunk.js.map": "/urban-chainsaw/static/js/787.b01b676a.chunk.js.map"
+    "main.css": "/tables/static/css/main.73d734ce.css",
+    "main.js": "/tables/static/js/main.fe0f1def.js",
+    "static/js/787.2187a825.chunk.js": "/tables/static/js/787.2187a825.chunk.js",
+    "index.html": "/tables/index.html",
+    "main.73d734ce.css.map": "/tables/static/css/main.73d734ce.css.map",
+    "main.fe0f1def.js.map": "/tables/static/js/main.fe0f1def.js.map",
+    "787.2187a825.chunk.js.map": "/tables/static/js/787.2187a825.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.73d734ce.css",
-    "static/js/main.71441b64.js"
+    "static/js/main.fe0f1def.js"
   ]
 }
